@@ -1,67 +1,48 @@
-// C program for implementation of selection sort
+//complxity best case = avg case = worst case = n^2.
 #include <stdio.h>
 
 void print(int arr[], int size);
 void selectionSort(int arr[], int n);
-void swap(int *xp, int *yp);
+void swap(int *temp1, int *temp2);
 
 // Driver program to test above functions
-int main()
-{
-    int n;
+void main() {
+    int n;//array size
     printf("Enter how many element : ");
-    scanf("%d",&n);
-    int arr[n];
+    scanf("%d", &n);//input array size
+    int arr[n];//array declare
 
     printf("Enter the element : ");
-    for (int i = 0; i < n; i++) {
-        scanf("%d",&arr[i]);
-    }
+    for (int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);//input array
+
     printf("Before sorted the array : ");
-    print(arr,n);
+    print(arr, n);
 
-    // Function call to sort
-    selectionSort(arr, n);
-
+    selectionSort(arr, n); // Function call to sort
     printf("After Sorted the array : ");
-    print(arr,n);
-
-    return 0;
+    print(arr, n);
 }
 
 //print the array
-void print(int arr[], int size)
-{
-    int i;
-    for (i=0; i < size; i++)
+void print(int arr[], int size) {
+    for (int i = 0; i < size; i++)
         printf("%d \t", arr[i]);
     printf("\n");
 }
 
 //sort the array
-void selectionSort(int arr[], int n)
-{
-    int i, j, min_idx;
-
-    // One by one move boundary of unsorted subarray
-    for (i = 0; i < n-1; i++)
-    {
-        // Find the minimum element in unsorted array
-        min_idx = i;
-        for (j = i+1; j < n; j++)
-            if (arr[j] < arr[min_idx])
-                min_idx = j;
-
-        // Swap the found minimum element with the first element
-        if(min_idx != i)
-            swap(&arr[min_idx], &arr[i]);
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i+1; j < n; j++)
+            if (arr[j] < arr[i]) //find minimum value and swap with large value.
+                swap(&arr[j], &arr[i]);
     }
 }
 
 //swap two variable
-void swap(int *xp, int *yp)
-{
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
+void swap(int *temp1, int *temp2) {
+    int temp = *temp1;
+    *temp1 = *temp2;
+    *temp2 = temp;
 }
