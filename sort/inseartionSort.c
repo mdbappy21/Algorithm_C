@@ -1,11 +1,10 @@
 //complxity best case =n ,avg case = worst case = n^2
-#include <math.h>
 #include <stdio.h>
 
 void print(int arr[], int n);
 void insertionSort(int arr[], int n);
 
-int main()
+void main()
 {
     int n;//array size
     printf("Enter how many element  : ");
@@ -22,8 +21,6 @@ int main()
 
     printf("After sorted the array : ");
     print(arr, n);//call function to print the array
-
-    return 0;
 }
 
 //print the array
@@ -37,15 +34,9 @@ void print(int arr[], int n)
 //sort the array
 void insertionSort(int arr[], int n)
 {
-    int i,j,temp;
-    for (i = 1; i < n; i++) {
-        temp = arr[i];
-        j = i - 1;
-
-        while (j >= 0 && arr[j] > temp) {
-            arr[j + 1] = arr[j];
-            j = j - 1;
-            arr[j + 1] = temp;
+    for (int i = 0; i < n; i++)
+        while (i >= 0 && arr[i] > arr[i+1]) {
+            arr[i] = arr[i+1];
+            arr[i + 1] = arr[i];
         }
-    }
 }
