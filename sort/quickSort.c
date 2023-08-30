@@ -1,29 +1,26 @@
 //best case = avg case = n log(n), worst case = n^2
 #include <stdio.h>
-#include <stdlib.h>
 
 void print(int arr[],int n);
 void quickSort(int arr[], int low, int high);
 int partition(int arr[], int low, int high);
 void swap(int* a, int* b);
 
-// Driver code
 void main()
 {
-    int n;
+    int n;//array size
     printf("Enter how many element : ");
-    scanf("%d",&n);
-    int arr[n];
+    scanf("%d",&n);//input array size
+    int arr[n];//declare array
 
     printf("Enter the element : ");
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {//input array
         scanf("%d",&arr[i]);
     }
     printf("Before sorted the array : ");
     print(arr,n);
 
-    // Function call to sort
-    quickSort(arr, 0, n - 1);
+    quickSort(arr, 0, n - 1); // Function call to sort
 
     printf("After Sorted the array : ");
     print(arr,n);
@@ -38,38 +35,28 @@ void print(int arr[],int n){
 void quickSort(int arr[], int low, int high)
 {
     if (low < high) {
+        int pivot = partition(arr, low, high); //calculate pivot's write position.
 
-        // pi is partitioning index, arr[p] is now at right place
-        int pi = partition(arr, low, high);
-
-        // Separately sort elements before
-        // partition and after partition
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+        quickSort(arr, low, pivot - 1); //pivot's smallest element sort
+        quickSort(arr, pivot + 1, high); //pivot's biggest element sort
     }
 }
 
 // Partition the array using the last element as the pivot
 int partition(int arr[], int low, int high)
 {
-    // Choosing the pivot
-    int pivot = arr[high];
+    int pivot = arr[high];  // Choosing the pivot to last element.
+    int i = (low - 1);     //blank space create where we store smallest value.
 
-    // Index of smaller element and indicates the right position of pivot found so far
-    int i = (low - 1);
-
-    for (int j = low; j <= high - 1; j++) {
-
-        // If current element is smaller than the pivot
-        if (arr[j] < pivot) {
-
-            // Increment index of smaller element
+    for (int j = low; j < high ; j++) {
+        if (arr[j] < pivot) {   // If current element is smaller than the pivot
             i++;
             swap(&arr[i], &arr[j]);
         }
     }
-    swap(&arr[i + 1], &arr[high]);
-    return (i + 1);
+    i++;
+    swap(&arr[i], &arr[high]);
+    return i;
 }
 
 void swap(int* a, int* b)
